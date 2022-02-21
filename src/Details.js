@@ -33,12 +33,11 @@ class Details extends Component {
                 <h2>{`${animal} - ${breed} - ${city}, ${state}`}</h2>
                <button>Adopt {name}</button>
                <p>{description}</p>
+               <button><a href="/" style={{color: 'white'}}>Back</a></button>
             </div>
         )
     }
-
 }
-
 
 
 export default withRouter(Details)
