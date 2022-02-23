@@ -2,12 +2,13 @@ import { Component } from "react"
 import { withRouter } from 'react-router-dom'
 import Carousel from "./Carousel"
 import ErrorBoundary from "./ErrorBoundary"
+import Modal from "./Modal"
 
 
 class Details extends Component {
 
     
-        state = { loading: true }
+        state = { loading: true, showModal: false }
 
 
     async componentDidMount (){
@@ -23,18 +24,34 @@ class Details extends Component {
         json.pets[0]
         ))
     }
+
+    toggleModal = () => this.setState({showModal: !this.setState.showModal })
+
+    adopt = () => {window.location = "http://bit.ly/pet-adopt"}
+
     render(){
         if(this.state.loading){
             return <h3>loading ...</h3>
         }
-        const { animal, breed, city, state, description, name, images } = this.state
+        const { animal, breed, city, state, description, name, images, showModal } = this.state
         return (
             <div className="details">
                 <Carousel images={images} />
                 <h1>{name}</h1>
                 <h2>{`${animal} - ${breed} - ${city}, ${state}`}</h2>
-               <button>Adopt {name}</button>
+               <button onClick={this.toggleModal}>Adopt {name}</button>
                <p>{description}</p>
+               {
+                   showModal ? (
+                   <Modal> 
+                       <div>
+                           <h1>Would you like to adopt {name}?</h1>
+                           <div  className="buttons">
+                                <button onClick={this.adopt}>Yes</button>
+                                <button onClick={this.toggleModal}>No</button>
+                           </div>
+                       </div>
+                   </Modal> ) : null }
                <button><a href="/" style={{color: 'white'}}>Back</a></button>
             </div>
         )
