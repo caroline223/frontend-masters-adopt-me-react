@@ -10,7 +10,12 @@ const App = () => {
   return(
     //  the entire app is wrapped inside of a provider that is being passed a theme property
      <ThemeContext.Provider value={theme}> 
-      <div>
+      <div
+        className="p-0 m-0"
+        style={{
+          background: "url(http://pets-images.dev-apis.com/pets/wallpaperA.jpg)"
+        }}
+      >
         <Router>
         <header>
           <Link to="/">
